@@ -70,9 +70,7 @@ else()
     message(STATUS "Box2D (Linux): ${BOX2D_LIBRARY}")
 endif()
 
-# ---- SOL2 (Header-only) ----
-set(SOL2_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/Third_party/sol2/include")
-message(STATUS "Sol2: ${SOL2_INCLUDE_DIR}")
+
 
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "Src/*.cpp" "Src/*.h" "Src/*.hpp")
