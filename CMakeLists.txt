@@ -165,12 +165,12 @@ HERE="$(dirname "$(readlink -f "$0")")"
 OWD="$(pwd)"
 export LD_LIBRARY_PATH="${HERE}/usr/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 cd "${OWD}"
-exec "${HERE}/usr/bin/HolyRock" "$@"
+exec "${HERE}/usr/bin/Universe" "$@"
 ]==])
 
     file(WRITE "${CMAKE_BINARY_DIR}/build_appimage.cmake" "
         set(APP_DIR \"\${CMAKE_BINARY_DIR}/AppDir\")
-        set(EXE     \"\${DEST}/HolyRock\")
+        set(EXE     \"\${DEST}/Universe\")
 
         file(REMOVE_RECURSE \"\${APP_DIR}\")
         file(MAKE_DIRECTORY \"\${APP_DIR}/usr/bin\")
@@ -229,34 +229,34 @@ exec "${HERE}/usr/bin/HolyRock" "$@"
         file(RENAME \"\${APP_DIR}/AppRun.sh\" \"\${APP_DIR}/AppRun\")
         execute_process(COMMAND chmod +x \"\${APP_DIR}/AppRun\")
 
-        file(WRITE \"\${APP_DIR}/HolyRock.desktop\"
+        file(WRITE \"\${APP_DIR}/Universe.desktop\"
 \"[Desktop Entry]
-Name=HolyRock
-Exec=HolyRock
-Icon=HolyRock
+Name=Universe
+Exec=Universe
+Icon=Universe
 Type=Application
 Categories=Game;
 \")
 
         if(EXISTS \"\${SRC_DIR}/Assets/icon.png\")
             file(COPY \"\${SRC_DIR}/Assets/icon.png\" DESTINATION \"\${APP_DIR}/\")
-            file(RENAME \"\${APP_DIR}/icon.png\" \"\${APP_DIR}/HolyRock.png\")
-            file(COPY \"\${APP_DIR}/HolyRock.png\"
+            file(RENAME \"\${APP_DIR}/icon.png\" \"\${APP_DIR}/Universe.png\")
+            file(COPY \"\${APP_DIR}/Universe.png\"
                  DESTINATION \"\${APP_DIR}/usr/share/icons/hicolor/256x256/apps/\")
         else()
-            file(WRITE \"\${APP_DIR}/HolyRock.png\" \"\")
-            file(WRITE \"\${APP_DIR}/usr/share/icons/hicolor/256x256/apps/HolyRock.png\" \"\")
+            file(WRITE \"\${APP_DIR}/Universe.png\" \"\")
+            file(WRITE \"\${APP_DIR}/usr/share/icons/hicolor/256x256/apps/Universe.png\" \"\")
         endif()
 
         # POPRAWKA 2: --appimage-extract-and-run omija wymóg FUSE podczas budowania
-        message(STATUS \"Budowanie HolyRock.AppImage...\")
+        message(STATUS \"Budowanie Universe.AppImage...\")
         execute_process(
             COMMAND env ARCH=x86_64 \${APPIMAGETOOL} --appimage-extract-and-run
-                \"\${APP_DIR}\" \"\${DEST}/HolyRock.AppImage\"
+                \"\${APP_DIR}\" \"\${DEST}/Universe.AppImage\"
             RESULT_VARIABLE RESULT
         )
         if(RESULT EQUAL 0)
-            message(STATUS \">>> HolyRock.AppImage gotowy w Game/\")
+            message(STATUS \">>> Universe.AppImage gotowy w Game/\")
         else()
             message(WARNING \"appimagetool nie powiodło się! Zainstaluj: sudo apt install libfuse2\")
         endif()
@@ -275,7 +275,7 @@ Categories=Game;
             -DCMAKE_BINARY_DIR=${CMAKE_BINARY_DIR}
             -DAPPIMAGETOOL=${APPIMAGETOOL}
             -P "${CMAKE_BINARY_DIR}/build_appimage.cmake"
-        COMMENT "Budowanie HolyRock.AppImage..."
+        COMMENT "Budowanie Universe.AppImage..."
     )
 
 endif()
