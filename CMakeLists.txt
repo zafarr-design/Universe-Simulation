@@ -71,8 +71,6 @@ else()
 endif()
 
 
-
-
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "Src/*.cpp" "Src/*.h" "Src/*.hpp")
 
 add_executable(Universe ${SOURCES})
@@ -86,7 +84,6 @@ set_target_properties(Universe PROPERTIES WIN32_EXECUTABLE FALSE)
 
 target_include_directories(Universe PRIVATE
     ${LUA_INCLUDE_DIR}
-    ${SOL2_INCLUDE_DIR}
     ${ENET_INCLUDE_DIR}
     ${BOX2D_INCLUDE_DIR}
 )
